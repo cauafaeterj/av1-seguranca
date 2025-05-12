@@ -2,7 +2,7 @@ import re
 import logging
 import ipaddress
 
-# Configuração do logging para salvar em log.txt com codificação UTF-8
+ 
 logging.basicConfig(
     filename='log.txt',
     level=logging.INFO,
@@ -11,20 +11,20 @@ logging.basicConfig(
 )
 
 def sanitize_string(value):
-    """Remove caracteres perigosos de uma string."""
+     
     if value is None:
         return None
     if not isinstance(value, str):
         logging.warning(f"Tentativa de sanitizar valor não-string: {value}")
         return None
-    # Remove caracteres de controle e espaços extras
+     
     sanitized = ''.join(char for char in value.strip() if char.isprintable())
     if not sanitized:
         logging.warning(f"String sanitizada resultou em valor vazio: {value}")
     return sanitized
 
 def validate_email(email):
-    """Valida o formato do email usando uma expressão regular."""
+ 
     email = sanitize_string(email)
     if not email:
         logging.warning(f"Email inválido após sanitização: {email}")
@@ -40,7 +40,7 @@ def validate_email(email):
     return True
 
 def validate_ip(ip):
-    """Valida se o IP é um endereço IPv4 ou IPv6 válido."""
+     
     ip = sanitize_string(ip)
     if not ip:
         return True  
@@ -56,7 +56,7 @@ def validate_ip(ip):
         return False
 
 def validate_field(value, field_name, max_length, allow_empty=False):
-    """Valida um campo genérico (tipo, tamanho, vazio)."""
+    
     if value is None and allow_empty:
         return True
     if not isinstance(value, str):
