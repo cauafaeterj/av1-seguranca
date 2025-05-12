@@ -4,7 +4,7 @@ from datetime import datetime
 from Crypto.Hash import SHA256
 
 class User(db.Model, UserMixin):
-    """Modelo que representa um usuário no sistema de autenticação."""
+    
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
@@ -16,19 +16,19 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.today, nullable=False)
 
     def set_password(self, password):
-        """Gera o hash SHA256 da senha e armazena."""
+        
         hash_obj = SHA256.new()
         hash_obj.update(password.encode('utf-8'))
         self.password_hash = hash_obj.hexdigest()
 
     def check_password(self, password):
-        """Verifica se a senha fornecida corresponde ao hash armazenado."""
+         
         hash_obj = SHA256.new()
         hash_obj.update(password.encode('utf-8'))
         return self.password_hash == hash_obj.hexdigest()
 
     def to_dict(self):
-        """Converte o modelo para um dicionário."""
+        
         return {
             'id': self.id,
             'username': self.username,
@@ -40,7 +40,7 @@ class User(db.Model, UserMixin):
         }
 
     def __repr__(self):
-        """Representação em string do modelo User."""
+        
         return f'<User {self.username}>'
 
     @property
